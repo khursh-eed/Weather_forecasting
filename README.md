@@ -1,5 +1,7 @@
 Air Quality Forecasting using Statistical & Deep Learning Models
-📌 Project Overview
+
+
+Project Overview
 This project focuses on air quality forecasting using both classical time series models and deep learning models (LSTMs).
 The dataset consists of endogenous (e.g., CO, C6H6) and exogenous meteorological features (Temperature, Relative Humidity, Absolute Humidity, etc.), with strong seasonality identified.
 
@@ -13,7 +15,7 @@ Gradient Boosted Decision Trees (XGBoost)
 
 Multivariate LSTM networks
 
-📂 Dataset
+Dataset:
 Original dataset contained several pollutant and sensor time series.
 
 Many columns had over 90% missingness, which were dropped.
@@ -26,7 +28,7 @@ Alternative interpolators like spline were tested but resulted in unrealistic va
 
 Visualization of missingness was done via 3 diagnostic plots.
 
-🔄 Data Preprocessing
+Data Preprocessing:
 Missing Values
 
 Dropped columns with >90% missing values.
@@ -47,8 +49,8 @@ Seasonal Decomposition (additive & multiplicative).
 
 Found 2 main seasonalities in exogenous features.
 
-📊 Modeling Approaches
-1️⃣ Classical Models: ARIMA / SARIMA
+Modeling Approaches
+1. Classical Models: ARIMA / SARIMA
 
 Used ARIMA on single endogenous variables with exogenous features + seasonality → SARIMA.
 
@@ -62,7 +64,7 @@ RH: RMSE = 21.41
 
 Another series: RMSE = 0.33
 
-2️⃣ VARIMAX
+2. VARIMAX
 
 Multivariate extension of ARIMA for multiple endogenous series (CO, NOx, Benzene).
 
@@ -72,7 +74,7 @@ AIC/BIC indicated very high lag orders → risk of overfitting.
 
 Not ideal since dataset includes exogenous features → not pursued further.
 
-3️⃣ Gradient Boosted Trees (XGBoost)
+3. Gradient Boosted Trees (XGBoost)
 
 Created lag features for target variables.
 
@@ -86,7 +88,7 @@ Feature 2: 49.20
 
 Feature 3: 12.35
 
-4️⃣ Multivariate LSTM
+4. Multivariate LSTM
 
 Input: Scaled & sequenced data with 24-hour sliding window.
 
@@ -104,12 +106,12 @@ Captured both endogenous & exogenous dependencies.
 
 Based on attached LSTM_results.xlsx, LSTM outperforms classical models for most pollutants.
 
-📈 Results Summary
+Results Summary
 Model	Variables	Notes	RMSE (examples)
 ARIMA / SARIMA	Univariate + Exogenous	Seasonal orders tuned	T: 1.04, RH: 21.41, Other: 0.33
 VARIMAX	Multivariate	Too high lag, less accurate	Not used
 XGBoost	With lag features	Some series high error	F1: 0.28, F2: 49.20, F3: 12.35
 LSTM	Multivariate (window=24h)	Sequential DL, best performer	(Predictions vs Actual available in LSTM_results.xlsx)
-➡️ LSTM provided the best overall generalization, especially compared to VARIMAX and XGBoost.
-➡️ SARIMA still produced good results for individual pollutants with strong seasonal structure.
+➡ LSTM provided the best overall generalization, especially compared to VARIMAX and XGBoost.
+➡ SARIMA still produced good results for individual pollutants with strong seasonal structure.
 
